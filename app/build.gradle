@@ -1,0 +1,51 @@
+plugins {
+    id 'java'
+    id 'war'  // Required for building a WAR file
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Servlet API for web applications
+    implementation 'jakarta.servlet:jakarta.servlet-api:5.0.0'
+
+    // JSP API for JSP pages
+    implementation 'jakarta.servlet.jsp:jakarta.servlet.jsp-api:3.0.0'
+
+    // JDBC Driver for MySQL
+    implementation 'mysql:mysql-connector-java:8.0.33'
+
+    // Connection pooling for better database performance
+    implementation 'com.zaxxer:HikariCP:5.0.1'
+
+    // JSON parsing (useful for APIs and AJAX)
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.0'
+
+    // Lombok (reduces boilerplate code)
+    compileOnly 'org.projectlombok:lombok:1.18.28'
+    annotationProcessor 'org.projectlombok:lombok:1.18.28'
+
+    // Logging (for debugging and monitoring)
+    implementation 'ch.qos.logback:logback-classic:1.4.11'
+
+    // JUnit for testing
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+// Define the web application's entry point
+tasks.named('war') {
+    archiveFileName = 'OnlineVehicleReservationSystem.war'
+}
+
+test {
+    useJUnitPlatform()
+}
